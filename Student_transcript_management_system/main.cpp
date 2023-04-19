@@ -3,7 +3,7 @@ using namespace std;
 data_manager manager;
 int main()
 {
-	//manager.push_back("123 name 65 85");
+	manager.push_back("123 name 65 85");
 	//try
 	//{
 	//	manager.push_back("1234 name 65 85");

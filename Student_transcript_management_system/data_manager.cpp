@@ -212,7 +212,7 @@ bool data_manager::REGEX(string main_str, string sub)
 	//	{
 
 	//	}
-	//return false;
+	return false;
 }
 
 void data_manager::del_index(list<data_node>::iterator target_ele)
