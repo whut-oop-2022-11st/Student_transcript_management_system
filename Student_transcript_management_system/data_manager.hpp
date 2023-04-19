@@ -15,14 +15,13 @@ public:
 	void load(string path = "./data.db");//读取信息，缺省值为./data.db
 	string node_info(list<data_node>::iterator node);//返回迭代器所指节点的所有信息，以string方式返回
 	list<data_node>::iterator search_by_num(string info);//通过学号搜索学生，返回对应迭代器
-	vector<list<data_node>::iterator> search_by_name(string info, bool use_fuzzy_sezrch_if_no_ans = false);//通过姓名搜索学生，返回迭代器组（同名情况）,use_fuzzy_search:使用模糊搜索
+	vector<list<data_node>::iterator> search_by_name(string info, bool use_fuzzy_sezrch_if_no_ans = false, bool Regex_Search = false);//通过姓名搜索学生，返回迭代器组（同名情况）,use_fuzzy_search:使用模糊搜索
 	vector<string> all_node_info_by_num();//学号按字典序输出，返回字符串组
 	size_t length();//返回信息数量
 	size_t size();//返回信息数量
 	list<data_node>::iterator& operator[](int i);//重载[]操作符，提供下标访问支持（随机访问支持）
 	void update_index();//更新索引信息，一般不需要使用
 private:
-	bool REGEX(string main_str, string sub);//正则表达式匹配
 	void del_index(list<data_node>::iterator target_ele);//删除节点索引信息
 	list<data_node>data;//数据
 	map<string, vector<list<data_node>::iterator>>name_data;//名字索引信息
