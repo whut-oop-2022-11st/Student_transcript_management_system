@@ -21,6 +21,7 @@
 #include <map>
 #include <cstdlib>
 #include <exception>
+#include <regex>
 #include "data_node.hpp"
 #include "data_manager.hpp"
 #include "user_service.hpp"

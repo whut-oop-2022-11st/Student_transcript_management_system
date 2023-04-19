@@ -3,6 +3,21 @@ using namespace std;
 data_manager manager;
 int main()
 {
+	//manager.push_back("asd snhjdss 123 465");
+	//manager.push_back("asds snhjsxsa 123 465");
+	//manager.push_back("assds vsnhjsxsa 123 465");
+
+	//auto x = manager.search_by_name("s*", false, true);
+	//for (auto y : x)
+	//{
+	//	cout << y->show_all_ele() << endl;
+	//}
+
+	//string a = "你好", info = "*好*";
+	//size_t x = info.find('x');
+	//size_t i;
+
+
 	//manager.push_back("123 name 65 85");
 	//try
 	//{

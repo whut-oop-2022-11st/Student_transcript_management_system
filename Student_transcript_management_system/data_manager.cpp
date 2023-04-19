@@ -132,23 +132,48 @@ list<data_node>::iterator data_manager::search_by_num(string info)
 	return x->second;
 }
 
-vector<list<data_node>::iterator> data_manager::search_by_name(string info, bool use_fuzzy_sezrch_if_no_ans)
+vector<list<data_node>::iterator> data_manager::search_by_name(string info, bool use_fuzzy_sezrch_if_no_ans, bool Regex_Search)
 {
+	vector<list<data_node>::iterator>ans;
 	map<string, vector<list<data_node>::iterator>>::iterator x;
 	if ((x = name_data.find(info)) == name_data.end())
-		if (!use_fuzzy_sezrch_if_no_ans)
-			return vector<list<data_node>::iterator>({ data.end() });
-		else
+	{
+		if (Regex_Search)
 		{
-			vector<list<data_node>::iterator>ans;
+			for (size_t i = info.find('?'); i != numeric_limits<size_t>::max(); i = info.find('?'))
+				info.replace((size_t)i, 1, ".");
+			for (size_t i = info.find('*'); i != numeric_limits<size_t>::max(); i = info.find('*'))
+				info.replace((size_t)i, 1, ".{0,100}");
+			for (map<string, vector<list<data_node>::iterator>>::iterator it = name_data.begin(); it != name_data.end(); it++)
+			{
+				if (regex_match(it->first, regex(info, regex::icase)))
+				{
+					for (vector<list<data_node>::iterator>::iterator ip = it->second.begin(); ip != it->second.end(); ip++)
+					{
+						ans.push_back(*ip);
+					}
+				}
+			}
+			if (!ans.empty())
+				return ans;
+		}
+		if (use_fuzzy_sezrch_if_no_ans)
+		{
 			for (map<string, vector<list<data_node>::iterator>>::iterator it = name_data.begin(); it != name_data.end(); it++)
 			{
 				if (!(it->first.find(info) == string::npos))
 				{
-
+					for (vector<list<data_node>::iterator>::iterator ip = it->second.begin(); ip != it->second.end(); ip++)
+					{
+						ans.push_back(*ip);
+					}
 				}
 			}
+			if (!ans.empty())
+				return ans;
 		}
+		return vector<list<data_node>::iterator>({ data.end() });
+	}
 	return x->second;
 }
 
@@ -195,24 +220,6 @@ void data_manager::update_index()
 			name_data[it->name()].push_back(it);
 		sequence_data.push_back(it);
 	}
-}
-
-bool data_manager::REGEX(string main_str, string sub)
-{
-	//vector<vector<bool>>dp(sub.size(), vector<bool>(main_str.size(), false));
-	//for (size_t x = 0, length = sub.size(), start = 0; x < length; x++)
-	//{
-	//	for (size_t y = start, size = main_str.size(); y < size; y++)
-	//	{
-	//		if(sub[])
-	//	}
-	//	sub[x]
-	//}
-	//	for (vector<bool>& it : dp)
-	//	{
-
-	//	}
-	//return false;
 }
 
 void data_manager::del_index(list<data_node>::iterator target_ele)
