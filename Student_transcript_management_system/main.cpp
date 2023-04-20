@@ -6,6 +6,13 @@ user_service service;
 int main()
 {
 	//This is a conflict
+	//manager.push_back("1234 name 80 91");
+	//manager.push_back("12345 name 81 92");
+	//manager.push_back("123456 name 81 92");
+	//manager.save();
+	//manager.load();
+	//manager.change(manager.search_by_num("12345"),"114514 n56 85 68");
+
 	for (;;)
 	{
 		int menu();
@@ -21,6 +28,7 @@ int main()
 			service.search();
 			break;
 		case 3:
+			cout << "test";
 			break;
 		case 4:
 			break;
