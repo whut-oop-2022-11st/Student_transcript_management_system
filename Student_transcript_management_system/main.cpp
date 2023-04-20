@@ -4,6 +4,8 @@ data_manager manager;
 int main()
 {
 	manager.push_back("123 name 65 85");
+	user_service ser;
+	ser.search();
 	//manager.push_back("asd snhjdss 123 465");
 	//manager.push_back("asds snhjsxsa 123 465");
 	//manager.push_back("assds vsnhjsxsa 123 465");
