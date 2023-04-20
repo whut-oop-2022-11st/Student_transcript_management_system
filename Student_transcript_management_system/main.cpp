@@ -1,12 +1,26 @@
 ﻿#include "global.hpp"
 using namespace std;
 data_manager manager;
+tool tl;
 int main()
 {
+
+	//try
+	//{
+	//	manager.node_info(manager.search_by_num("123"));
+	//}
+	//catch (string s)
+	//{
+	//	cout << s;
+	//}
+	//tl[6];
+	//cout << endl << tl.current_time();
+	//tl[20];
+
 	//manager.push_back("123 name 65 85");
 	//user_service ser;
 	//ser.search();
-	//manager.push_back("asd snhjdss 123 465");
+	//manager.push_back("asd snhjdss 123 465");f
 	//manager.push_back("asds snhjsxsa 123 465");
 	//manager.push_back("assds vsnhjsxsa 123 465");
 

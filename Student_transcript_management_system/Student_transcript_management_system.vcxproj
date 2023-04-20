@@ -130,12 +130,14 @@
     <ClCompile Include="data_manager.cpp" />
     <ClCompile Include="data_node.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="tool.cpp" />
     <ClCompile Include="user_service.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data_manager.hpp" />
     <ClInclude Include="data_node.hpp" />
     <ClInclude Include="global.hpp" />
+    <ClInclude Include="tool.hpp" />
     <ClInclude Include="user_service.hpp" />
   </ItemGroup>
   <ItemGroup>

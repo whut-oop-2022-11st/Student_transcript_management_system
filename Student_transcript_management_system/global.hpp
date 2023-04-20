@@ -1,4 +1,5 @@
 ﻿#pragma once
+using namespace std;
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -22,6 +23,9 @@
 #include <cstdlib>
 #include <exception>
 #include <regex>
+#include <Windows.h>
+#include <chrono>
+#include "tool.hpp"
 #include "data_node.hpp"
 #include "data_manager.hpp"
 #include "user_service.hpp"

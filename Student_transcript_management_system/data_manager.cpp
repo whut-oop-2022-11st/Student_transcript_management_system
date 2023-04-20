@@ -121,6 +121,8 @@ void data_manager::load(string path)
 
 string data_manager::node_info(list<data_node>::iterator node)
 {
+	if (node == data.end())
+		throw string("try to show the node after the last node");
 	return node->show_all_ele();
 }
 
@@ -140,9 +142,9 @@ vector<list<data_node>::iterator> data_manager::search_by_name(string info, bool
 	{
 		if (Regex_Search)
 		{
-			for (size_t i = info.find('?'); i != numeric_limits<size_t>::max(); i = info.find('?'))
+			for (size_t i = info.find('?'); i != (numeric_limits<size_t>::max)(); i = info.find('?'))
 				info.replace((size_t)i, 1, ".");
-			for (size_t i = info.find('*'); i != numeric_limits<size_t>::max(); i = info.find('*'))
+			for (size_t i = info.find('*'); i != (numeric_limits<size_t>::max)(); i = info.find('*'))
 				info.replace((size_t)i, 1, ".{0,100}");
 			for (map<string, vector<list<data_node>::iterator>>::iterator it = name_data.begin(); it != name_data.end(); it++)
 			{

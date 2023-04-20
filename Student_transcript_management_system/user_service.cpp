@@ -1,5 +1,4 @@
 ﻿#include "user_service.hpp"
-using namespace std;
 void user_service::add()
 {
 	string temp;
