@@ -7,3 +7,4 @@ public:
 	void search();
 private:
 };
+extern user_service service;

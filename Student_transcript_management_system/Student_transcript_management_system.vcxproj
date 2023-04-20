@@ -130,6 +130,7 @@
     <ClCompile Include="data_manager.cpp" />
     <ClCompile Include="data_node.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="tool.cpp" />
     <ClCompile Include="user_service.cpp" />
   </ItemGroup>

@@ -2,9 +2,34 @@
 using namespace std;
 data_manager manager;
 tool tl;
+user_service service;
 int main()
 {
-
+	for (;;)
+	{
+		int menu();
+		int i = menu();
+		switch (i)
+		{
+		case 0:
+			return 0;
+		case 1:
+			service.add();
+			break;
+		case 2:
+			service.search();
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		}
+	}
+	return 0;
 	//try
 	//{
 	//	manager.node_info(manager.search_by_num("123"));
