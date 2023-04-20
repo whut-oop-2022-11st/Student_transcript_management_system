@@ -201,7 +201,8 @@ size_t data_manager::size()
 list<data_node>::iterator& data_manager::operator[](int i)
 {
 	size_t delta = 0;
-	for (vector<size_t>::iterator it = del_eles.begin(); *it <= i && it != del_eles.end(); delta++, it++);
+	if(!del_eles.empty())
+		for (vector<size_t>::iterator it = del_eles.begin(); *it <= i && it != del_eles.end(); delta++, it++);
 	return sequence_data[i - delta];
 }
 
