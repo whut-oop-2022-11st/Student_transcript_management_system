@@ -20,6 +20,7 @@ int main()
 			service.search();
 			break;
 		case 3:
+			cout << "test";
 			break;
 		case 4:
 			break;
