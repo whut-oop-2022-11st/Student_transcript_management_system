@@ -15,7 +15,7 @@ public:
 	void load(string path = "./data.db");//读取信息，缺省值为./data.db
 	string node_info(list<data_node>::iterator node);//返回迭代器所指节点的所有信息，以string方式返回
 	list<data_node>::iterator search_by_num(string info);//通过学号搜索学生，返回对应迭代器
-	vector<list<data_node>::iterator> search_by_name(string info, bool use_fuzzy_sezrch_if_no_ans = false, bool Regex_Search = false);//通过姓名搜索学生，返回迭代器组（同名情况）,use_fuzzy_search:使用模糊搜索
+	vector<list<data_node>::iterator> search_by_name(string info, bool use_fuzzy_search_if_no_ans = false, bool Regex_Search = false);//通过姓名搜索学生，返回迭代器组（同名情况）,use_fuzzy_search:使用模糊搜索
 	vector<string> all_node_info_by_num();//学号按字典序输出，返回字符串组
 	size_t length();//返回信息数量
 	size_t size();//返回信息数量

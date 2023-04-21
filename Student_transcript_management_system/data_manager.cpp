@@ -5,16 +5,16 @@ void data_manager::push_back(string info)
 {
 	stringstream sstream(info);
 	string temp;
-	vector<string>ve_info;
+	vector<string>ve_info;//学生信息保存的临时数组
 	for (int i = 0; i < 4; i++)
 	{
 		sstream >> temp;
 		ve_info.push_back(temp);
 		temp.clear();
 	}
-	ve_info.push_back(to_string(sequence_data.size()));
+	ve_info.push_back(to_string(sequence_data.size()));//在该数组最后添加次序下标，便于后续下标访问
 	if (!(search_by_num(ve_info[0]) == data.end()))
-		throw string("Number conflict!");
+		throw string("Number conflict!");//抛出异常，外面需要try...catch...
 	data_node node(ve_info);
 	data.push_back(node);
 	num_data.insert(pair<string, list<data_node>::iterator>(ve_info[0], --data.end()));
@@ -27,10 +27,10 @@ void data_manager::push_back(string info)
 
 void data_manager::push_back(vector<string> info)
 {
-	info.push_back(to_string(sequence_data.size()));
+	info.push_back(to_string(sequence_data.size()));//添加次序
 	data_node node(info);
 	if (!(search_by_num(info[0]) == data.end()))
-		throw string("Number conflict!");
+		throw string("Number conflict!");//抛出异常
 	data.push_back(node);
 	num_data.insert(pair<string, list<data_node>::iterator>(info[0], --data.end()));
 	if ((search_by_name(info[1]))[0] == data.end())
@@ -134,13 +134,13 @@ list<data_node>::iterator data_manager::search_by_num(string info)
 	return x->second;
 }
 
-vector<list<data_node>::iterator> data_manager::search_by_name(string info, bool use_fuzzy_sezrch_if_no_ans, bool Regex_Search)
+vector<list<data_node>::iterator> data_manager::search_by_name(string info, bool use_fuzzy_search_if_no_ans, bool Regex_Search)
 {
 	vector<list<data_node>::iterator>ans;
 	map<string, vector<list<data_node>::iterator>>::iterator x;
 	if ((x = name_data.find(info)) == name_data.end())
 	{
-		if (Regex_Search)
+		if (Regex_Search)//正则表达式查询
 		{
 			for (size_t i = info.find('?'); i != (numeric_limits<size_t>::max)(); i = info.find('?'))
 				info.replace((size_t)i, 1, ".");
@@ -159,7 +159,7 @@ vector<list<data_node>::iterator> data_manager::search_by_name(string info, bool
 			if (!ans.empty())
 				return ans;
 		}
-		if (use_fuzzy_sezrch_if_no_ans)
+		if (use_fuzzy_search_if_no_ans)//使用模糊查询
 		{
 			for (map<string, vector<list<data_node>::iterator>>::iterator it = name_data.begin(); it != name_data.end(); it++)
 			{
@@ -198,7 +198,7 @@ size_t data_manager::size()
 	return data.size();
 }
 
-list<data_node>::iterator& data_manager::operator[](int i)
+list<data_node>::iterator& data_manager::operator[](int i)//重载操作符[]
 {
 	size_t delta = 0;
 	if(!del_eles.empty())
@@ -206,7 +206,7 @@ list<data_node>::iterator& data_manager::operator[](int i)
 	return sequence_data[i - delta];
 }
 
-void data_manager::update_index()
+void data_manager::update_index()//更新索引信息
 {
 	size_t i = 0;
 	name_data.clear();
@@ -225,7 +225,7 @@ void data_manager::update_index()
 	}
 }
 
-void data_manager::del_index(list<data_node>::iterator target_ele)
+void data_manager::del_index(list<data_node>::iterator target_ele)//删除索引信息
 {
 	num_data.erase(num_data.find(target_ele->num()));
 	map<string, vector<list<data_node>::iterator>>::iterator it = name_data.find(target_ele->name());
