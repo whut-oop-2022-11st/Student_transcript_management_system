@@ -201,7 +201,7 @@ size_t data_manager::size()
 list<data_node>::iterator& data_manager::operator[](int i)//重载操作符[]
 {
 	size_t delta = 0;
-	if(!del_eles.empty())
+	if (!del_eles.empty())
 		for (vector<size_t>::iterator it = del_eles.begin(); *it <= i && it != del_eles.end(); delta++, it++);
 	return sequence_data[i - delta];
 }
@@ -223,6 +223,41 @@ void data_manager::update_index()//更新索引信息
 			name_data[it->name()].push_back(it);
 		sequence_data.push_back(it);
 	}
+}
+
+vector<double> data_manager::node_scores(short choice)
+{
+	vector<double>ans;
+	switch (choice)
+	{
+	case 0:
+	{
+		for (list<data_node>::iterator it = data.begin(); it != data.end(); it++)
+		{
+			ans.push_back(it->usual_grades());
+		}
+		break;
+	}
+	case 1:
+	{
+		for (list<data_node>::iterator it = data.begin(); it != data.end(); it++)
+		{
+			ans.push_back(it->exam_scores());
+		}
+		break;
+	}
+	case 2:
+	{
+		for (list<data_node>::iterator it = data.begin(); it != data.end(); it++)
+		{
+			ans.push_back(it->grade());
+		}
+		break;
+	}
+	default:
+		throw string("No such choice");
+	}
+	return ans;
 }
 
 void data_manager::del_index(list<data_node>::iterator target_ele)//删除索引信息
