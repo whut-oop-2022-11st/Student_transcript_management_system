@@ -6,6 +6,14 @@ void tool::operator[](short x)
 	else//默认的颜色白色
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 }
+void tool::clc()
+{
+	int ch = 0;
+	while ((ch = getchar()) != EOF && ch != '\n')
+	{
+		;
+	}
+}
 string tool::current_time()
 {
 	char s[101];

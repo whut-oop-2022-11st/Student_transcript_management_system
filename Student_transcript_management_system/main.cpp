@@ -5,13 +5,8 @@ tool tl;
 user_service service;
 int main()
 {
-	//manager.push_back("1234 name 80 91");
-	//manager.push_back("12345 name 81 92");
-	//manager.push_back("123456 name 81 92");
-	//manager.save();
-	//manager.load();
-	//manager.change(manager.search_by_num("12345"),"114514 n56 85 68");
-
+	manager.load();
+	manager.update_index();
 	for (;;)
 	{
 		int menu();
@@ -19,6 +14,7 @@ int main()
 		switch (i)
 		{
 		case 0:
+			manager.save();
 			return 0;
 		case 1:
 			service.add();
@@ -27,9 +23,10 @@ int main()
 			service.search();
 			break;
 		case 3:
-			cout << "test";
+			service.change();
 			break;
 		case 4:
+			service.del();
 			break;
 		case 5:
 			break;
