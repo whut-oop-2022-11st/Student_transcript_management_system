@@ -31,6 +31,7 @@ int main()
 		case 5:
 			break;
 		case 6:
+			service.stats();
 			break;
 		}
 	}

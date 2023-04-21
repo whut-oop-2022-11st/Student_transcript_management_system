@@ -7,6 +7,7 @@ public:
 	void search();
 	void del();
 	void change();
+	void stats();
 private:
 };
 extern user_service service;

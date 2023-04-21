@@ -166,3 +166,58 @@ void user_service::change()
 	manager.change(it, new_info);
 	cout << "修改成功" << endl;
 }
+
+void user_service::stats()
+{
+	vector<double>all_grades;
+	vector<size_t>subsection(10,0);
+	double max = 0, min = 100,all=0;
+	int i = 0,n=manager.length();
+	for(i=0;i<n;i++)
+	{
+		data_node message = *manager[i];
+		all_grades.push_back(message.grade());
+		if (message.grade() / 10 < 10)
+			subsection[message.grade() / 10]++;
+		else
+			subsection[9]++;
+		if (max < message.grade())
+			max = message.grade();
+		if (min > message.grade())
+			min = message.grade();
+		all += message.grade();
+	}
+	i = 0;
+	tl[2];
+	cout << "最高成绩为：";
+	tl[4];
+	cout << setprecision(2) << max << endl;
+	tl[2];
+	cout << "最低成绩为：";
+	tl[4];
+	cout << setprecision(2) << min << endl;
+	tl[2];
+	cout << "平均成绩为：";
+	tl[4];
+	cout << setprecision(2) << all/n << endl;
+	for (int j = 0, k = 9; i < 10; i++)
+	{
+		if (subsection[i] == 0);
+		else
+		{
+			tl[1];
+			cout << j << "分到" << k << "分区间人数：";
+			tl[4];
+			cout<< subsection[i] << endl;
+			tl[16];
+		}
+		j += 10;
+		if (k == 89)
+			k = 100;
+		else
+			k += 10;
+	}
+	tl[6];
+	cout << "其余区间人数均为0" << endl;
+	tl[16];
+}
