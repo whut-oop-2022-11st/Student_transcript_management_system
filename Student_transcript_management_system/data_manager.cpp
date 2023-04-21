@@ -3,6 +3,10 @@
 
 void data_manager::push_back(string info)
 {
+	if ((info.find('?', 0)) != -1)
+		throw string("'?' is not allowed");
+	if ((info.find('*', 0)) != -1)
+		throw string("'*' is not allowed");
 	stringstream sstream(info);
 	string temp;
 	vector<string>ve_info;//学生信息保存的临时数组
@@ -31,6 +35,14 @@ void data_manager::push_back(vector<string> info)
 	data_node node(info);
 	if (!(search_by_num(info[0]) == data.end()))
 		throw string("Number conflict!");//抛出异常
+	if ((info[0].find('?', 0)) != -1)
+		throw string("'?' is not allowed");
+	if ((info[0].find('*', 0)) != -1)
+		throw string("'*' is not allowed");
+	if ((info[1].find('?', 0)) != -1)
+		throw string("'?' is not allowed");
+	if ((info[1].find('*', 0)) != -1)
+		throw string("'*' is not allowed");
 	data.push_back(node);
 	num_data.insert(pair<string, list<data_node>::iterator>(info[0], --data.end()));
 	if ((search_by_name(info[1]))[0] == data.end())
@@ -57,7 +69,6 @@ void data_manager::del(list<data_node>::iterator del_ele)
 
 void data_manager::change(list<data_node>::iterator change_ele, string info)
 {
-
 	stringstream sstream(info);
 	string temp;
 	vector<string>ve_info;
@@ -67,6 +78,8 @@ void data_manager::change(list<data_node>::iterator change_ele, string info)
 		ve_info.push_back(temp);
 		temp.clear();
 	}
+	if (change_ele->num() == info && search_by_num(ve_info[0]) != data.end())
+		throw string("Number conflict");
 	del_index(change_ele);
 	change_ele->resetinfo(ve_info);
 	num_data.insert(pair<string, list<data_node>::iterator>(change_ele->num(), change_ele));
@@ -78,7 +91,8 @@ void data_manager::change(list<data_node>::iterator change_ele, string info)
 
 void data_manager::change(list<data_node>::iterator change_ele, vector<string>info)
 {
-
+	if (change_ele->num() == info[0] && search_by_num(info[0]) != data.end())
+		throw string("Number conflict");
 	del_index(change_ele);
 	change_ele->resetinfo(info);
 	num_data.insert(pair<string, list<data_node>::iterator>(change_ele->num(), change_ele));
@@ -124,6 +138,11 @@ string data_manager::node_info(list<data_node>::iterator node)
 	if (node == data.end())
 		throw string("try to show the node after the last node");
 	return node->show_all_ele();
+}
+
+vector<string> data_manager::ve_node_info(list<data_node>::iterator node)
+{
+	return vector<string>{ node->num(), node->name(), to_string(node->usual_grades()), to_string(node->exam_scores()) };
 }
 
 list<data_node>::iterator data_manager::search_by_num(string info)
