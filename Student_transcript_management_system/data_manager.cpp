@@ -78,7 +78,7 @@ void data_manager::change(list<data_node>::iterator change_ele, string info)
 		ve_info.push_back(temp);
 		temp.clear();
 	}
-	if (change_ele->num() == info && search_by_num(ve_info[0]) != data.end())
+	if (change_ele->num() != info && search_by_num(ve_info[0]) != data.end())
 		throw string("Number conflict");
 	del_index(change_ele);
 	change_ele->resetinfo(ve_info);
@@ -91,7 +91,7 @@ void data_manager::change(list<data_node>::iterator change_ele, string info)
 
 void data_manager::change(list<data_node>::iterator change_ele, vector<string>info)
 {
-	if (change_ele->num() == info[0] && search_by_num(info[0]) != data.end())
+	if (change_ele->num() != info[0] && search_by_num(info[0]) != data.end())
 		throw string("Number conflict");
 	del_index(change_ele);
 	change_ele->resetinfo(info);
