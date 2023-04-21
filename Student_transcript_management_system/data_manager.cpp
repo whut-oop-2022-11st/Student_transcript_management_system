@@ -142,6 +142,8 @@ string data_manager::node_info(list<data_node>::iterator node)
 
 vector<string> data_manager::ve_node_info(list<data_node>::iterator node)
 {
+    if (node == data.end())
+        throw string("try to show the node after the last node");
 	return vector<string>{ node->num(), node->name(), to_string(node->usual_grades()), to_string(node->exam_scores()) };
 }
 
