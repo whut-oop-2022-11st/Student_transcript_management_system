@@ -10,7 +10,8 @@ int main()
 	//manager.push_back("12345 name 81 92");
 	//manager.push_back("123456 name 81 92");
 	//manager.save();
-	//manager.load();
+	manager.load();
+	manager.update_index();
 	//manager.change(manager.search_by_num("12345"),"114514 n56 85 68");
 
 	for (;;)
@@ -20,6 +21,7 @@ int main()
 		switch (i)
 		{
 		case 0:
+			manager.save();
 			return 0;
 		case 1:
 			service.add();
@@ -35,6 +37,7 @@ int main()
 		case 5:
 			break;
 		case 6:
+			service.stats();
 			break;
 		}
 	}
