@@ -25,6 +25,7 @@ using namespace std;
 #include <regex>
 #include <Windows.h>
 #include <chrono>
+#include "encipher.hpp"
 #include "tool.hpp"
 #include "data_node.hpp"
 #include "data_manager.hpp"
