@@ -3,10 +3,21 @@ using namespace std;
 data_manager manager;
 tool tl;
 user_service service;
+encipher enci;
 int main()
 {
 	manager.load();
 	manager.update_index();
+	errno_t err = 0;
+	do
+	{
+		int login();
+		err = login();
+		if (err == -1)
+		{
+			return -1;
+		}
+	} while (err != 0);
 	for (;;)
 	{
 		int menu();
