@@ -142,8 +142,8 @@ string data_manager::node_info(list<data_node>::iterator node)
 
 vector<string> data_manager::ve_node_info(list<data_node>::iterator node)
 {
-    if (node == data.end())
-        throw string("try to show the node after the last node");
+	if (node == data.end())
+		throw string("try to show the node after the last node");
 	return vector<string>{ node->num(), node->name(), to_string(node->usual_grades()), to_string(node->exam_scores()) };
 }
 
@@ -163,8 +163,12 @@ vector<list<data_node>::iterator> data_manager::search_by_name(string info, bool
 	{
 		if (Regex_Search)//正则表达式查询
 		{
+			auto is_chinese = find_if(info.begin(), info.end(), [](char x) {return !((x ^ 128) == 0); });
 			for (size_t i = info.find('?'); i != (numeric_limits<size_t>::max)(); i = info.find('?'))
-				info.replace((size_t)i, 1, ".");
+				if (is_chinese == info.end())
+					info.replace((size_t)i, 1, ".");
+				else
+					info.replace((size_t)i, 1, "..");
 			for (size_t i = info.find('*'); i != (numeric_limits<size_t>::max)(); i = info.find('*'))
 				info.replace((size_t)i, 1, ".{0,100}");
 			for (map<string, vector<list<data_node>::iterator>>::iterator it = name_data.begin(); it != name_data.end(); it++)
