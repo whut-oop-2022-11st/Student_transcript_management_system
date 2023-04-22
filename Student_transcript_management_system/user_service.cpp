@@ -473,8 +473,9 @@ void user_service::stats()
 		}
 		cout << "--成绩分布--" << endl;
 		auto scoreData = manager.node_scores(k);
-		auto max = std::max_element(scoreData.begin(), scoreData.end());
-		auto min = std::min_element(scoreData.begin(), scoreData.end());
+		sort(scoreData.begin(), scoreData.end());
+		auto max = scoreData.end() - 1;
+		auto min = scoreData.begin();
 		int step = int(*max - *min) / 8 + 1;
 		int maxNum = 0;
 		double center = 0.0;
