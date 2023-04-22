@@ -484,28 +484,28 @@ void user_service::stats()
 		tl[16];
 		auto scoreData = manager.node_scores(k);
 		sort(scoreData.begin(), scoreData.end());
-		auto max = scoreData.end() - 1;
-		auto min = scoreData.begin();
-		int step = int(*max - *min) / 8 + 1;
+		auto max = scoreData.end() - 1;//最高分数下标
+		auto min = scoreData.begin();//最忌分数下标
+		int step = int(*max - *min) / 8 + 1;//区间长度
 		int maxNum = 0;
-		double center = 0.0;
-		double ave = 0.0;
+		double center = 0.0;//中位数
+		double ave = 0.0;//平均值
 		for (int i = int(*min - 1); i < int(*max + 1); i += step) {
 			//        i--i+step-1
 			int tmpMaxNum = 0;
-			for (double x : scoreData) {
+			for (double x : scoreData) {//遍历整个向量
 				ave += x;
 				if (x >= i && x <= i + step - 1) {
 					tmpMaxNum++;
-				}
+				}//每个区间的人数
 			}
 			if (tmpMaxNum > maxNum) {
-				maxNum = tmpMaxNum;
+				maxNum = tmpMaxNum;//找出最多的人数
 			}
 		}
 		int a = (int)scoreData.size() * 8;
-		ave /= a;
-		center = scoreData[int(scoreData.size() / 2)];
+		ave /= a;//计算平均分
+		center = scoreData[int(scoreData.size() / 2)];//找到中位数
 		for (int i = int(*min - 1); i < int(*max + 1); i += step) {
 			tl[11];
 			cout << left << setw(4) << setfill(' ') << i << " -- " << setw(4) << setfill(' ') << i + step - 1 << ":";
@@ -518,11 +518,11 @@ void user_service::stats()
 			}
 			for (int j = 0; j < int(((tmpMaxNum * 1.0) / (maxNum * 1.0) * 20)); ++j) {
 				/*cout << u8"\u2588";*/
-				cout << char(168) << char(128);
+				cout << char(168) << char(128);//输出柱形条
 				//cout << "-";
 			}
 			tl[12];
-			cout << tmpMaxNum << "人" << endl;
+			cout << tmpMaxNum << "人" << endl;//显示该区间人数
 			tl[16];
 		}
 		tl[3];
