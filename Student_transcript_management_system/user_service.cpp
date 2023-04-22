@@ -458,20 +458,30 @@ void user_service::stats()
 	////	tl[6];
 	//	cout << "其余区间人数均为0" << endl;
 	////	tl[16];
+	tl[6];
 	cout << "------数据分析------" << endl;
+	tl[16];
 	for (int k = 0; k < 3; ++k) {
 		switch (k) {
 		case 0:
+			tl[3];
 			cout << "----平时成绩----" << endl;
+			tl[16];
 			break;
 		case 1:
+			tl[3];
 			cout << "----期末成绩----" << endl;
+			tl[16];
 			break;
 		case 2:
+			tl[3];
 			cout << "----总评成绩----" << endl;
+			tl[16];
 			break;
 		}
+		tl[3];
 		cout << "--成绩分布--" << endl;
+		tl[16];
 		auto scoreData = manager.node_scores(k);
 		auto max = std::max_element(scoreData.begin(), scoreData.end());
 		auto min = std::min_element(scoreData.begin(), scoreData.end());
@@ -496,7 +506,9 @@ void user_service::stats()
 		ave /= a;
 		center = scoreData[int(scoreData.size() / 2)];
 		for (int i = int(*min - 1); i < int(*max + 1); i += step) {
+			tl[11];
 			cout << left << setw(4) << setfill(' ') << i << " -- " << setw(4) << setfill(' ') << i + step - 1 << ":";
+			tl[16];
 			int tmpMaxNum = 0;
 			for (double x : scoreData) {
 				if (x >= i && x <= i + step - 1) {
@@ -508,11 +520,17 @@ void user_service::stats()
 				cout << char(168) << char(128);
 				//cout << "-";
 			}
+			tl[12];
 			cout << tmpMaxNum << "人" << endl;
+			tl[16];
 		}
+		tl[3];
 		cout << "--成绩数据--" << endl;
+		tl[16];
+		tl[14];
 		cout << "平均分：" << ave << endl;
 		cout << "中位数：" << center << endl;
+		tl[16];
 	}
 }
 
