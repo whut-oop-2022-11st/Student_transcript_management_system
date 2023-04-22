@@ -127,11 +127,11 @@ void user_service::del()
 	cin >> num;
 
 	auto it = manager.search_by_num(num);
-	try                                                  //此处的try  catch 解决了要访问manager::data的问题 
+	try                                         //此处的try  catch 解决了要访问manager::data的问题 
 	{
 		manager.node_info(it);
 	}
-	catch (...)                                          //为了简便 用...来捕获所有的异常
+	catch (...)                                 //为了简便 用...来捕获所有的异常
 	{
 		cout << "未找到对应学号的学生" << endl;
 		return;
@@ -145,11 +145,11 @@ void user_service::del()
 	if (confirm == 'Y' || confirm == 'y')
 	{
 		manager.del(it);
-		cout << "删除成功" << endl;
+		cout << "删除成功!" << endl;
 	}
 	else
 	{
-		cout << "已取消操作" << endl;
+		cout << "已取消操作!" << endl;
 	}
 }
 
@@ -158,7 +158,7 @@ void user_service::del()
 // 输入要修改的学生的学号，显示该学生的原有信息，用户输入修改后的信息。
 void user_service::change()
 {
-	tl.clc();                                 //tl.clc()还是上次实验的问题 中  cin和getline最好不要混用  有回车问题 此处统一为用getline
+	tl.clc();                      //tl.clc()还是上次实验的问题 中  cin和getline最好不要混用  有回车问题
 	string num;
 	cout << "请输入要修改的学生的学号: ";
 	//	getline(cin, num);
