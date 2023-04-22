@@ -134,6 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="data_log.cpp" />
     <ClCompile Include="data_manager.cpp" />
     <ClCompile Include="data_node.cpp" />
     <ClCompile Include="encipher.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="data_node.hpp" />
     <ClInclude Include="encipher.hpp" />
     <ClInclude Include="global.hpp" />
+    <ClInclude Include="data_log.hpp" />
     <ClInclude Include="tool.hpp" />
     <ClInclude Include="user_service.hpp" />
   </ItemGroup>

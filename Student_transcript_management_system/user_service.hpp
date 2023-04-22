@@ -9,6 +9,7 @@ public:
 	void change();
 	void show();
 	void stats();
+	void show_log();
 private:
 	void head();
 	void scout(string s);

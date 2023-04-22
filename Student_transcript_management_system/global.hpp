@@ -29,4 +29,5 @@ using namespace std;
 #include "tool.hpp"
 #include "data_node.hpp"
 #include "data_manager.hpp"
+#include "data_log.hpp"
 #include "user_service.hpp"

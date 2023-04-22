@@ -207,6 +207,8 @@ void user_service::add()
 			try
 			{
 				manager.push_back(x);
+				//aixintao 记录日志部分
+				Log.add(num, name, (usual_grades), (exam_scores));
 			}
 			catch (string s)
 			{
@@ -271,6 +273,8 @@ void user_service::search()
 				scout(tmp->show_all_ele());
 				//cout << tmp->show_all_ele() << endl;
 			}
+			//aixintao 记录日志部分
+			Log.search(student);
 			return;
 		}
 		catch (...) {
@@ -341,6 +345,7 @@ void user_service::change()
 	cin >> choice;
 	vector<string> new_info = manager.ve_node_info(it);
 	string info;
+	string temp[4] = { new_info[0],new_info[1] ,new_info[2] ,new_info[3] };
 	switch (choice) {
 	case 1:
 		cout << "请输入修改后的学号: ";
@@ -359,7 +364,7 @@ void user_service::change()
 		break;
 	case 4:
 		cout << "请输入修改后的考试成绩: ";
-		cin >> info;
+		cin >> info;		
 		new_info[3] = info;
 		break;
 	default:
@@ -380,6 +385,8 @@ void user_service::change()
 	try {
 		manager.change(it, new_info);
 		manager.save();
+		Log.change(temp[0], temp[1], atof(temp[2].c_str()), atof(temp[3].c_str()),
+			new_info[0], new_info[1], atof(new_info[2].c_str()), atof(new_info[3].c_str())); //修改的日志
 		cout << "修改成功" << endl;
 		return;
 	}
@@ -533,6 +540,16 @@ void user_service::stats()
 		cout << "中位数：" << center << endl;
 		tl[16];
 	}
+}
+
+//查询并显示日志
+void user_service::show_log(){
+	tl.getday_tips();
+	time_t set = tl.getday("请输入查询起始日期（含该日）：");
+	time_t end = tl.getday("请输入查询截止日期（含该日）：") + 86399ll; //把这一天全包括在内
+
+
+	Log.log_out(set, end);
 }
 
 void user_service::head()

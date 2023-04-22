@@ -4,6 +4,8 @@ data_manager manager;
 tool tl;
 user_service service;
 encipher enci;
+log_manager Log;
+string logfile = "log.dat";
 int main()
 {
 	manager.load();
@@ -44,6 +46,9 @@ int main()
 			break;
 		case 6:
 			service.stats();
+			break;
+		case 7:
+			service.show_log();
 			break;
 		}
 	}

@@ -36,6 +36,9 @@
     <ClCompile Include="encipher.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="data_log.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data_manager.hpp">
@@ -54,6 +57,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="encipher.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="data_log.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
