@@ -2,71 +2,233 @@
 void user_service::add()
 {
 	string temp;
+	tl[7];
 	cout << "------信息录入------" << endl;
 	cout << "请选择录入方式。" << endl;
 	cout << "(1):录入单个学生信息(默认方式)\n(2)录入多个学生信息\n请输入1或2。" << endl;
 	cin >> temp;
+	string a;
 	string num;
 	string name;
 	double usual_grades;
 	double exam_scores;
 	if (temp == "2")
 	{
-		int stunum = 0;      //要录入的学生数量
+		unsigned int stunum = 0;      //要录入的学生数量
+
 		cout << "请输入要录入的学生数量。" << endl;
-		cin >> stunum;
-		for (int i = 0; i < stunum; i++)
+		for (;;)
 		{
+			cin >> a;
+			auto test = [](string age)->bool {
+				if (age.length() == 0 || age.length() >= 4)
+					return false;
+				for (char x : age)
+				{
+					if ('0' <= x && x <= '9')
+						continue;
+					return false;
+				}
+				return true;
+			};
+
+			if (test(a))
+				break;
+			else
+			{
+				tl[4];
+				cout << "输入非法,请重新输入" << endl;
+				tl[7];
+			}
+		}
+		stunum = atoi(a.c_str());
+
+		for (unsigned int i = 0; i < stunum; i++)
+		{
+			tl[7];
 			cout << "第" << i + 1 << "位学生学号:";
 			cin >> num;
 			cout << "第" << i + 1 << "位学生姓名:";
 			cin >> name;
-			cout << "第" << i + 1 << "位学生平时成绩:";
-			cin >> usual_grades;
-			cout << "第" << i + 1 << "位学生考试成绩:";
-			cin >> exam_scores;
+			cout << "第" << i + 1 << "位学生平时成绩(阿拉伯数字):";
+			for (;;)
+			{
+				cin >> a;
+				auto test = [](string age)->bool {
+					if (age.length() == 0 || age.length() >= 4)
+						return false;
+					for (char x : age)
+					{
+						if ('0' <= x && x <= '9')
+							continue;
+						return false;
+					}
+					return true;
+				};
+
+				if (test(a))
+					break;
+				else
+				{
+					tl[4];
+					cout << "输入非法,请重新输入" << endl;
+					tl[7];
+				}
+			}
+			usual_grades = atof(a.c_str());
+
+			tl[7];
+			cout << "第" << i + 1 << "位学生考试成绩(阿拉伯数字):";
+			for (;;)
+			{
+				cin >> a;
+				auto test = [](string age)->bool {
+					if (age.length() == 0 || age.length() >= 4)
+						return false;
+					for (char x : age)
+					{
+						if ('0' <= x && x <= '9')
+							continue;
+						return false;
+					}
+					return true;
+				};
+
+				if (test(a))
+					break;
+				else
+				{
+					tl[4];
+					cout << "输入非法,请重新输入" << endl;
+					tl[7];
+				}
+			}
+			exam_scores = atof(a.c_str());
+
+			if (stunum > 1)
+			{
+				tl[14];
+				cout << "--------------------------" << endl;
+			}
+
 			vector<string> x = { num,name,to_string(usual_grades),to_string(exam_scores) };
 			try
 			{
 				manager.push_back(x);
-				cout << "录入成功" << endl;
+
 			}
 			catch (string s)
 			{
-				//				cout << s << endl;
-				cout << "学号重复，请重新输入该学生信息" << endl;
+				tl[4];
+				cout << s << endl;
+				tl[7];
+				cout << "(1):重新输入该学生信息(默认)\n(2):停止添加\n请输入1或2" << endl;
+				int x = 0;
+				cin >> x;
+				if (x == 2)
+				{
+					cout << "录入停止。" << endl;
+					return;
+				}
 				i--;
 				continue;
 			}
-			if (stunum > 1)
-			{
-				cout << "--------------------------" << endl;
-			}
 		}
-		manager.save();
+		tl[7];
 		cout << "录入完毕!" << endl;
 		return;
 	}
-	cout << "学生学号:";
-	cin >> num;
-	cout << "学生姓名:";
-	cin >> name;
-	cout << "学生平时成绩:";
-	cin >> usual_grades;
-	cout << "学生考试成绩:";
-	cin >> exam_scores;
-	vector<string> x = { num,name,to_string(usual_grades),to_string(exam_scores) };
-	try
+	if (temp == "1")
 	{
-		manager.push_back(x);
-		manager.save();
+		for (int i = 0; i < 1; i++)
+		{
+			tl[7];
+			cout << "学生学号:";
+			cin >> num;
+			cout << "学生姓名:";
+			cin >> name;
+			cout << "学生平时成绩(阿拉伯数字):";
+
+			for (;;)
+			{
+				cin >> a;
+				auto test = [](string age)->bool {
+					if (age.length() == 0 || age.length() >= 4)
+						return false;
+					for (char x : age)
+					{
+						if ('0' <= x && x <= '9')
+							continue;
+						return false;
+					}
+					return true;
+				};
+
+				if (test(a))
+					break;
+				else
+				{
+					tl[4];
+					cout << "输入非法,请重新输入" << endl;
+					tl[7];
+				}
+			}
+			usual_grades = atof(a.c_str());
+			tl[7];
+			cout << "学生考试成绩(阿拉伯数字):";
+			for (;;)
+			{
+				cin >> a;
+				auto test = [](string age)->bool {
+					if (age.length() == 0 || age.length() >= 4)
+						return false;
+					for (char x : age)
+					{
+						if ('0' <= x && x <= '9')
+							continue;
+						return false;
+					}
+					return true;
+				};
+
+
+				if (test(a))
+					break;
+				else
+				{
+					tl[4];
+					cout << "输入非法,请重新输入" << endl;
+					tl[7];
+				}
+			}
+			exam_scores = atof(a.c_str());
+
+			vector<string> x = { num,name,to_string(usual_grades),to_string(exam_scores) };
+			try
+			{
+				manager.push_back(x);
+			}
+			catch (string s)
+			{
+				tl[4];
+				cout << s << endl;
+				tl[7];
+				cout << "(1):重新输入该学生信息(默认)\n(2):停止添加\n请输入1或2" << endl;
+				int x = 0;
+				cin >> x;
+				if (x == 2)
+				{
+					cout << "录入停止。" << endl;
+					return;
+				}
+				i--;
+				continue;
+			}
+		}
+		tl[7];
 		cout << "录入完毕!" << endl;
+		return;
 	}
-	catch (string s)
-	{
-		cout << "学号重复，输入已取消" << endl;
-	}
-	return;
 }
 
 void user_service::search()
