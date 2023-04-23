@@ -128,11 +128,14 @@ void user_service::add()
 				if (x == 2)
 				{
 					cout << "录入停止。" << endl;
+					//aixintao 记录日志部分
+					Log.add(num, name, (usual_grades), (exam_scores));
 					return;
 				}
 				i--;
 				continue;
 			}
+
 		}
 		tl[7];
 		cout << "录入完毕!" << endl;
@@ -307,11 +310,12 @@ void user_service::del()
 	char confirm;
 	cout << "是否确认删除(Y/N): ";
 	cin >> confirm;
-
+	string dnum = it->num();
 	if (confirm == 'Y' || confirm == 'y')
 	{
 		manager.del(it);
 		cout << "删除成功!" << endl;
+		Log.del(dnum);
 	}
 	else
 	{
@@ -364,7 +368,7 @@ void user_service::change()
 		break;
 	case 4:
 		cout << "请输入修改后的考试成绩: ";
-		cin >> info;		
+		cin >> info;
 		new_info[3] = info;
 		break;
 	default:
@@ -544,12 +548,12 @@ void user_service::stats()
 		cout << "平均分：" << ave << endl;
 		cout << "中位数：" << center << endl;
 		tl[16];
-		Log.stats(type,ave,center); //保存日志
+		Log.stats(type, ave, center); //保存日志
 	}
 }
 
 //查询并显示日志
-void user_service::show_log(){
+void user_service::show_log() {
 	tl.getday_tips();
 	time_t set = tl.getday("请输入查询起始日期（含该日）：");
 	time_t end = tl.getday("请输入查询截止日期（含该日）：") + 86399ll; //把这一天全包括在内

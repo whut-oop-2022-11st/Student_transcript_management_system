@@ -121,7 +121,7 @@ int menu()
 	{
 		tl[7];
 		cin >> i;
-		if (i >= 0 && i < 7)
+		if (i >= 0 && i < 8)
 		{
 			return i;
 		}

@@ -1,8 +1,8 @@
-#include "data_log.hpp"
+ï»¿#include "data_log.hpp"
 
 
 
-void log_manager::add(string& num, string& name, double usual, double exam){
+void log_manager::add(string& num, string& name, double usual, double exam) {
 	read();
 	_log temp;
 	get<0>(temp) = 1;
@@ -22,7 +22,7 @@ void log_manager::search(string& keyword)
 	get<0>(temp) = 2;
 	time(&get<1>(temp));
 	get<3>(temp) = keyword;
-	logs.push_back(temp);	
+	logs.push_back(temp);
 	write();
 }
 
@@ -63,10 +63,10 @@ void log_manager::show() {
 	write();
 }
 
-void log_manager::log_out(time_t set, time_t end){
+void log_manager::log_out(time_t set, time_t end) {
 	read();
 	if (logs.empty()) {
-		cout << "ÏµÍ³ÖÐÎÞÈÕÖ¾ÐÅÏ¢£¡";
+		cout << "ç³»ç»Ÿä¸­æ— æ—¥å¿—ä¿¡æ¯ï¼" << endl;
 	}
 	else {
 		int cnt = 0;
@@ -77,14 +77,14 @@ void log_manager::log_out(time_t set, time_t end){
 			}
 		}
 		if (!cnt) {
-			cout << "Î´²éÑ¯µ½ÈÕÖ¾ÐÅÏ¢£¡";
+			cout << "æœªæŸ¥è¯¢åˆ°æ—¥å¿—ä¿¡æ¯ï¼" << endl;
 		}
 	}
 	write();
 }
 
 void log_manager::stats(string& type, double avg, double mid) {
-	read(); 
+	read();
 	_log temp;
 	get<0>(temp) = 6;
 	time(&get<1>(temp));
@@ -99,55 +99,55 @@ void log_manager::stats(string& type, double avg, double mid) {
 /*
 void log_manager::head(){
 	tl[3];
-	cout << setiosflags(ios::left) << D << "Ê±¼ä" << setw(14) << "ÐÕÃû" << setw(12) << "Æ½Ê±³É¼¨" << setw(12) << "¿¼ÊÔ³É¼¨" << setw(12) << "×Ü³É¼¨" << endl;
+	cout << setiosflags(ios::left) << D << "æ—¶é—´" << setw(14) << "å§“å" << setw(12) << "å¹³æ—¶æˆç»©" << setw(12) << "è€ƒè¯•æˆç»©" << setw(12) << "æ€»æˆç»©" << endl;
 	tl[7];
 }*/
 
-void log_manager::logout(_log& l){
+void log_manager::logout(_log& l) {
 	read();
-	int type;    //ÊÂ¼þÀàÐÍ
-	time_t time; //ÊÂ¼þÊ±¼ä
+	int type;    //äº‹ä»¶ç±»åž‹
+	time_t time; //äº‹ä»¶æ—¶é—´
 	string num;
 	string name;
 	double usual;
 	double exam;
-	//ÒÔÏÂÎªÐÞ¸ÄÖÐµÄ"Ö®Ç°"Ïî
+	//ä»¥ä¸‹ä¸ºä¿®æ”¹ä¸­çš„"ä¹‹å‰"é¡¹
 	string prenum;
 	string prename;
 	double preusual;
 	double preexam;
 
-	tie(type,time, num, name, usual, exam,
+	tie(type, time, num, name, usual, exam,
 		prenum, prename, preusual, preexam) = l;
 	string t = tl.TimeToString(time);
 	cout << "[" << t << "] ";
-	switch (type){
-	case 1: //Â¼Èë
-		cout << "Ìí¼ÓÁËÒ»ÌõÑ§ÉúÐÅÏ¢£ºÑ§ºÅ: " << setw(14) << num << "ÐÕÃû: " << name <<"Æ½Ê±³É¼¨: " << setw(20) << usual << "ÆÚÄ©³É¼¨: " << setw(20) << exam;
+	switch (type) {
+	case 1: //å½•å…¥
+		cout << "æ·»åŠ äº†ä¸€æ¡å­¦ç”Ÿä¿¡æ¯ï¼šå­¦å·: " << setw(14) << num << "å§“å: " << name << "å¹³æ—¶æˆç»©: " << setw(20) << usual << "æœŸæœ«æˆç»©: " << setw(20) << exam;
 		break;
-	case 2: //²éÑ¯
-		cout << "°´¹Ø¼ü´Ê " << setw(14) << name << " ²éÑ¯ÁË³É¼¨£¡";
+	case 2: //æŸ¥è¯¢
+		cout << "æŒ‰å…³é”®è¯ " << setw(14) << name << " æŸ¥è¯¢äº†æˆç»©ï¼";
 		break;
 	case 3:
-		cout << "°´Ñ§ºÅË³ÐòÏÔÊ¾ÁËÒ»´Î³É¼¨µ¥£¡";
+		cout << "æŒ‰å­¦å·é¡ºåºæ˜¾ç¤ºäº†ä¸€æ¬¡æˆç»©å•ï¼";
 		break;
 	case 4:
-		cout << "°´Ñ§ºÅ¹Ø¼ü´Ê " << setw(14) << name << " É¾³ýÁËÒ»Ìõ¼ÇÂ¼£¡";
+		cout << "æŒ‰å­¦å·å…³é”®è¯ " << setw(14) << name << " åˆ é™¤äº†ä¸€æ¡è®°å½•ï¼";
 		break;
 	case 5:
-		cout << "ÐÞ¸ÄÁË¸ÃÌõÑ§ÉúÐÅÏ¢£º"
-			<<"Ô­Ñ§ºÅ: " << setw(16) << prenum 
-			<< "Ô­ÐÕÃû: " << setw(14) << prename
-			<< "Ô­Æ½Ê±³É¼¨: " << setw(20) << preusual << "Ô­ÆÚÄ©³É¼¨: " << setw(20) << preexam
-			<<" ==> "<< "Ñ§ºÅ: " << setw(16) << num 
-			<< "ÐÕÃû: " << setw(14) << name
-			<< "Æ½Ê±³É¼¨: " << setw(20) << usual << "ÆÚÄ©³É¼¨: " << setw(20) << exam;
+		cout << "ä¿®æ”¹äº†è¯¥æ¡å­¦ç”Ÿä¿¡æ¯ï¼š"
+			<< "åŽŸå­¦å·: " << setw(16) << prenum
+			<< "åŽŸå§“å: " << setw(14) << prename
+			<< "åŽŸå¹³æ—¶æˆç»©: " << setw(20) << preusual << "åŽŸæœŸæœ«æˆç»©: " << setw(20) << preexam
+			<< " ==> " << "å­¦å·: " << setw(16) << num
+			<< "å§“å: " << setw(14) << name
+			<< "å¹³æ—¶æˆç»©: " << setw(20) << usual << "æœŸæœ«æˆç»©: " << setw(20) << exam;
 		break;
-	case 6: //±äÁ¿´úÖ¸Í³¼ÆÀàÐÍ¡¢Æ½¾ù·Ö¡¢ÖÐÎ»Êý
-		cout << "Í³¼Æ·ÖÎöÁËÒ»´Î" <<name <<"³É¼¨¡ª¡ªÆ½¾ù·Ö: " << usual << " ÖÐÎ»Êý: " << exam;
+	case 6: //å˜é‡ä»£æŒ‡ç»Ÿè®¡ç±»åž‹ã€å¹³å‡åˆ†ã€ä¸­ä½æ•°
+		cout << "ç»Ÿè®¡åˆ†æžäº†ä¸€æ¬¡" << name << "æˆç»©â€”â€”å¹³å‡åˆ†: " << usual << " ä¸­ä½æ•°: " << exam;
 		break;
 	default:
-		cout << "´íÎóÈÕÖ¾£¡";
+		cout << "é”™è¯¯æ—¥å¿—ï¼";
 		break;
 	}
 	cout << endl;
@@ -161,15 +161,15 @@ void log_manager::read()
 		ifs.open(logfile, ios::binary | ios::in);
 	}
 	catch (...) {
-		cout << "Å¶Ó´£¬ÈÕÖ¾ÎÄ¼þ " << logfile << " ´ò²»¿ªÀ²£¡\n";
+		cout << "å“¦å“Ÿï¼Œæ—¥å¿—æ–‡ä»¶ " << logfile << " æ‰“ä¸å¼€å•¦ï¼\n";
 		return;
 	}
 	_log* buf = new _log;
-	if (!buf){
-		cout << "ÄÚ´æ²»×ã£¡\n";
+	if (!buf) {
+		cout << "å†…å­˜ä¸è¶³ï¼\n";
 		return;
 	}
-	ifs.read((char*)buf,sizeof(_log));
+	ifs.read((char*)buf, sizeof(_log));
 	logs.push_back(*buf);
 }
 
@@ -180,12 +180,12 @@ void log_manager::write()
 		ofs.open(logfile, ios::binary | ios::out | ios::trunc);
 	}
 	catch (...) {
-		cout << "Å¶Ó´£¬ÈÕÖ¾ÎÄ¼þ " << logfile << " ´ò²»¿ªÀ²£¡\n";
+		cout << "å“¦å“Ÿï¼Œæ—¥å¿—æ–‡ä»¶ " << logfile << " æ‰“ä¸å¼€å•¦ï¼\n";
 		return;
 	}
 	_log* buf = new _log;
 	if (!buf) {
-		cout << "ÄÚ´æ²»×ã£¡\n";
+		cout << "å†…å­˜ä¸è¶³ï¼\n";
 		return;
 	}
 	for (auto x : logs) {
