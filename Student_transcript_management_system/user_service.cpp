@@ -21,11 +21,13 @@ void user_service::add()
 		{
 			cin >> a;
 			auto test = [](string age)->bool {
-				if (age.length() == 0 || age.length() >= 4)
+				if (age.length() == 0 || age.length() > 5)
 					return false;
 				for (char x : age)
 				{
 					if ('0' <= x && x <= '9')
+						continue;
+					if (x == '.')
 						continue;
 					return false;
 				}
@@ -55,11 +57,13 @@ void user_service::add()
 			{
 				cin >> a;
 				auto test = [](string age)->bool {
-					if (age.length() == 0 || age.length() >= 4)
+					if (age.length() == 0 || age.length() > 5)
 						return false;
 					for (char x : age)
 					{
 						if ('0' <= x && x <= '9')
+							continue;
+						if (x == '.')
 							continue;
 						return false;
 					}
@@ -83,11 +87,13 @@ void user_service::add()
 			{
 				cin >> a;
 				auto test = [](string age)->bool {
-					if (age.length() == 0 || age.length() >= 4)
+					if (age.length() == 0 || age.length() > 5)
 						return false;
 					for (char x : age)
 					{
 						if ('0' <= x && x <= '9')
+							continue;
+						if (x == '.')
 							continue;
 						return false;
 					}
@@ -115,6 +121,7 @@ void user_service::add()
 			try
 			{
 				manager.push_back(x);
+				Log.add(num, name, (usual_grades), (exam_scores));
 
 			}
 			catch (string s)
@@ -129,7 +136,7 @@ void user_service::add()
 				{
 					cout << "录入停止。" << endl;
 					//aixintao 记录日志部分
-					Log.add(num, name, (usual_grades), (exam_scores));
+
 					return;
 				}
 				i--;
@@ -156,11 +163,13 @@ void user_service::add()
 			{
 				cin >> a;
 				auto test = [](string age)->bool {
-					if (age.length() == 0 || age.length() >= 4)
+					if (age.length() == 0 || age.length() > 5)
 						return false;
 					for (char x : age)
 					{
 						if ('0' <= x && x <= '9')
+							continue;
+						if (x == '.')
 							continue;
 						return false;
 					}
@@ -183,11 +192,13 @@ void user_service::add()
 			{
 				cin >> a;
 				auto test = [](string age)->bool {
-					if (age.length() == 0 || age.length() >= 4)
+					if (age.length() == 0 || age.length() > 5)
 						return false;
 					for (char x : age)
 					{
 						if ('0' <= x && x <= '9')
+							continue;
+						if (x == '.')
 							continue;
 						return false;
 					}
