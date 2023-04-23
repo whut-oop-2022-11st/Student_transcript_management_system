@@ -1,9 +1,6 @@
 ﻿#include "data_log.hpp"
 
-
-
 void log_manager::add(string& num, string& name, double usual, double exam) {
-	read();
 	_log temp;
 	get<0>(temp) = 1;
 	time(&get<1>(temp));
@@ -17,7 +14,6 @@ void log_manager::add(string& num, string& name, double usual, double exam) {
 
 void log_manager::search(string& keyword)
 {
-	read();
 	_log temp;
 	get<0>(temp) = 2;
 	time(&get<1>(temp));
@@ -28,7 +24,6 @@ void log_manager::search(string& keyword)
 
 void log_manager::del(string& num)
 {
-	read();
 	_log temp;
 	get<0>(temp) = 4;
 	time(&get<1>(temp));
@@ -39,7 +34,6 @@ void log_manager::del(string& num)
 
 void log_manager::change(string& num, string& name, double usual, double exam, string& prenum, string& prename, double preusual, double preexam)
 {
-	read();
 	_log temp;
 	get<0>(temp) = 5;
 	time(&get<1>(temp));
@@ -56,7 +50,6 @@ void log_manager::change(string& num, string& name, double usual, double exam, s
 }
 
 void log_manager::show() {
-	read();
 	_log temp;
 	get<0>(temp) = 3;
 	time(&get<1>(temp));
@@ -80,19 +73,16 @@ void log_manager::log_out(time_t set, time_t end) {
 			cout << "未查询到日志信息！" << endl;
 		}
 	}
-	write();
+	logs.clear();
 }
 
 void log_manager::stats(string& type, double avg, double mid) {
-	read();
 	_log temp;
 	get<0>(temp) = 6;
 	time(&get<1>(temp));
-
 	get<3>(temp) = type;
 	get<4>(temp) = avg;
 	get<5>(temp) = mid;
-
 	logs.push_back(temp);
 	write();
 }
@@ -104,7 +94,6 @@ void log_manager::head(){
 }*/
 
 void log_manager::logout(_log& l) {
-	read();
 	int type;    //事件类型
 	time_t time; //事件时间
 	string num;
@@ -120,64 +109,122 @@ void log_manager::logout(_log& l) {
 	tie(type, time, num, name, usual, exam,
 		prenum, prename, preusual, preexam) = l;
 	string t = tl.TimeToString(time);
+	tl[14];
 	cout << "[" << t << "] ";
+	tl[7];
 	switch (type) {
 	case 1: //录入
-		cout << "添加了一条学生信息：学号: " << setw(14) << num << "姓名: " << name << "平时成绩: " << setw(20) << usual << "期末成绩: " << setw(20) << exam;
+		cout << "添加了一条学生信息：" << endl << "学号 : " << num << setw(15) << "姓名 : " << name << setw(15) << "平时成绩 : " << usual << setw(15) << "期末成绩 : " << exam << endl;
 		break;
 	case 2: //查询
-		cout << "按关键词 " << setw(14) << name << " 查询了成绩！";
+		cout << "按关键词 " << name << setw(14) << " 查询了成绩！" << endl;
 		break;
 	case 3:
-		cout << "按学号顺序显示了一次成绩单！";
+		cout << "按学号顺序显示了一次成绩单！" << endl;
 		break;
 	case 4:
-		cout << "按学号关键词 " << setw(14) << name << " 删除了一条记录！";
+		cout << "按学号关键词 " << name << setw(14) << " 删除了一条记录！" << endl;
 		break;
 	case 5:
 		cout << "修改了该条学生信息："
-			<< "原学号: " << setw(16) << prenum
-			<< "原姓名: " << setw(14) << prename
-			<< "原平时成绩: " << setw(20) << preusual << "原期末成绩: " << setw(20) << preexam
-			<< " ==> " << "学号: " << setw(16) << num
-			<< "姓名: " << setw(14) << name
-			<< "平时成绩: " << setw(20) << usual << "期末成绩: " << setw(20) << exam;
+			<< "原学号: " << prenum << setw(16)
+			<< "原姓名: " << prename << setw(14)
+			<< "原平时成绩: " << preusual << setw(20) << "原期末成绩: " << preexam << setw(20) << endl
+			<< " ==> " << "学号: " << num << setw(16)
+			<< "姓名: " << name << setw(14)
+			<< "平时成绩: " << usual << setw(20) << "期末成绩: " << exam << endl;
 		break;
 	case 6: //变量代指统计类型、平均分、中位数
-		cout << "统计分析了一次" << name << "成绩——平均分: " << usual << " 中位数: " << exam;
+		cout << "统计分析了一次" << name << "成绩——平均分: " << usual << " 中位数: " << exam << endl;
 		break;
 	default:
-		cout << "错误日志！";
+		cout << "错误日志！" << endl;
 		break;
 	}
-	cout << endl;
-	write();
 }
 
 void log_manager::read()
 {
 	ifstream ifs;
 	try {
-		ifs.open(logfile, ios::binary | ios::in);
+		ifs.open("./log.dat", ios::in);
 	}
 	catch (...) {
 		cout << "哦哟，日志文件 " << logfile << " 打不开啦！\n";
 		return;
 	}
-	_log* buf = new _log;
-	if (!buf) {
-		cout << "内存不足！\n";
+	if (!ifs.is_open())
+	{
+		cout << "哦哟，日志文件 " << logfile << " 打不开啦！\n";
 		return;
 	}
-	ifs.read((char*)buf, sizeof(_log));
-	logs.push_back(*buf);
+	for (;;)
+	{
+		string temp;
+		if (ifs.eof())
+			break;
+		getline(ifs, temp);
+		if (temp.length() == 0)
+			break;
+		int type = -1;
+		_log x;
+		stringstream sstream(temp);
+		sstream >> type;
+		switch (type)
+		{
+		case 1:
+			get<0>(x) = type;
+			sstream >> get<1>(x);
+			sstream >> get<2>(x);
+			sstream >> get<3>(x);
+			sstream >> get<4>(x);
+			sstream >> get<5>(x);
+			break;
+		case 2:
+			get<0>(x) = type;
+			sstream >> get<1>(x);
+			sstream >> get<3>(x);
+			break;
+		case 3:
+			get<0>(x) = type;
+			sstream >> get<1>(x);
+			break;
+		case 4:
+			get<0>(x) = type;
+			sstream >> get<1>(x);
+			sstream >> get<2>(x);
+			break;
+		case 5:
+			get<0>(x) = type;
+			sstream >> get<1>(x);
+			sstream >> get<2>(x);
+			sstream >> get<3>(x);
+			sstream >> get<4>(x);
+			sstream >> get<5>(x);
+			sstream >> get<6>(x);
+			sstream >> get<7>(x);
+			sstream >> get<8>(x);
+			sstream >> get<9>(x);
+			break;
+		case 6:
+			get<0>(x) = type;
+			sstream >> get<1>(x);
+			sstream >> get<3>(x);
+			sstream >> get<4>(x);
+			sstream >> get<5>(x);
+			break;
+		default:
+			break;
+		}
+		logs.push_back(x);
+	}
 }
 
 void log_manager::write()
 {
 	ofstream ofs;
 	try {
-		ofs.open(logfile, ios::binary | ios::out | ios::trunc);
+		ofs.open(logfile, ios::out | ios::app);
 	}
 	catch (...) {
 		cout << "哦哟，日志文件 " << logfile << " 打不开啦！\n";
@@ -189,7 +236,34 @@ void log_manager::write()
 		return;
 	}
 	for (auto x : logs) {
-		ofs.write((char*)&x, sizeof(_log));
+		int type = -1;
+		size_t time = 0;
+		string num, name, prenum, prename;
+		double usual, exam, preusual, preexam;
+		tie(type, time, num, name, usual, exam, prenum, prename, preusual, preexam) = x;
+		switch (type)
+		{
+		case 1:
+			ofs << type << ' ' << time << ' ' << num << ' ' << name << ' ' << usual << ' ' << exam << endl;
+			break;
+		case 2:
+			ofs << type << ' ' << time << ' ' << name << endl;
+			break;
+		case 3:
+			ofs << type << ' ' << time << endl;
+			break;
+		case 4:
+			ofs << type << ' ' << time << ' ' << num << endl;
+			break;
+		case 5:
+			ofs << type << ' ' << time << ' ' << num << ' ' << name << ' ' << usual << ' ' << exam << ' ' << prenum << ' ' << prename << ' ' << preusual << ' ' << preexam << endl;
+			break;
+		case 6:
+			ofs << type << ' ' << time << ' ' << name << ' ' << usual << ' ' << exam << endl;
+			break;
+		default:
+			break;
+		}
 	}
 	logs.clear();
 }
