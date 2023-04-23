@@ -385,8 +385,9 @@ void user_service::change()
 	try {
 		manager.change(it, new_info);
 		manager.save();
-		Log.change(temp[0], temp[1], atof(temp[2].c_str()), atof(temp[3].c_str()),
-			new_info[0], new_info[1], atof(new_info[2].c_str()), atof(new_info[3].c_str())); //修改的日志
+		Log.change(
+			new_info[0], new_info[1], atof(new_info[2].c_str()), atof(new_info[3].c_str()),
+			temp[0], temp[1], atof(temp[2].c_str()), atof(temp[3].c_str())); //修改的日志
 		cout << "修改成功" << endl;
 		return;
 	}
@@ -543,7 +544,7 @@ void user_service::stats()
 		cout << "平均分：" << ave << endl;
 		cout << "中位数：" << center << endl;
 		tl[16];
-		Log.search(type); //保存日志
+		Log.stats(type,ave,center); //保存日志
 	}
 }
 
