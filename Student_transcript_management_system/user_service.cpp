@@ -468,21 +468,25 @@ void user_service::stats()
 	tl[6];
 	cout << "------数据分析------" << endl;
 	tl[16];
+	string type; //保存日志用的类型字符串
 	for (int k = 0; k < 3; ++k) {
 		switch (k) {
 		case 0:
 			tl[3];
 			cout << "----平时成绩----" << endl;
+			type = "平时成绩";
 			tl[16];
 			break;
 		case 1:
 			tl[3];
 			cout << "----期末成绩----" << endl;
+			type = "期末成绩";
 			tl[16];
 			break;
 		case 2:
 			tl[3];
 			cout << "----总评成绩----" << endl;
+			type = "总评成绩";
 			tl[16];
 			break;
 		}
@@ -539,6 +543,7 @@ void user_service::stats()
 		cout << "平均分：" << ave << endl;
 		cout << "中位数：" << center << endl;
 		tl[16];
+		Log.search(type); //保存日志
 	}
 }
 
