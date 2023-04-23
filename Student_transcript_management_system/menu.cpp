@@ -66,7 +66,6 @@ int login()
 	}
 	string username, code, temp;
 	tl[2];
-	cout << "欢迎进入学生信息管理系统" << endl;
 	for (int i = 0; i < 3; i++)
 	{
 		in.seekg(ios::beg);
